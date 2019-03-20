@@ -1,0 +1,39 @@
+{
+  "name": "headless-hippo",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --hot",
+    "build": "webpack --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonhaddow/headless-hippo.git"
+  },
+  "author": "Jon Haddow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonhaddow/headless-hippo/issues"
+  },
+  "homepage": "https://github.com/jonhaddow/headless-hippo#readme",
+  "dependencies": {
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-hot-loader": "^4.3.11"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "babel-polyfill": "^6.0.16",
+    "babel-preset-stage-0": "^6.0.15",
+    "css-loader": "^1.0.0",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.2.1"
+  }
+}

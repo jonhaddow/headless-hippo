@@ -1,18 +1,21 @@
-import React, { Component} from "react";
-import {hot} from "react-hot-loader";
-import SiteModel from "./models/site_model.js";
-import Header from "./header.js";
-import Footer from "./footer.js";
+import React, { Component } from "react";
+import { hot } from "react-hot-loader";
+import SiteModel from "./models/site_model";
+import Header from "./header";
+import Footer from "./footer";
+import Media from "./models/media";
 
-class App extends Component{
+class App extends Component {
   constructor(props){
     super(props);
 
     this._initializeModel();
+    this._initializeMediaModel();
+
     this.state = {};
   }
 
-  render(){
+  render() {
     return(
       <div className="main-container">
         <Header
@@ -34,6 +37,11 @@ class App extends Component{
       siteDescription: json.description,
       siteUrl: json.url
     });
+  }
+
+  async _initializeMediaModel() {
+    this.mediaModel = new Media();
+    let json = await this.mediaModel.fetch()
   }
 }
 

@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import { hot } from "react-hot-loader";
-import SiteModel from "./models/site_model";
-import Header from "./header";
-import Footer from "./footer";
-import Media from "./models/media";
+import SiteModel from "../models/site-model";
+import Header from "../header/header";
+import Footer from "../footer/footer";
 
 class App extends Component {
   constructor(props){
     super(props);
-
+    
     this._initializeModel();
-    this._initializeMediaModel();
 
     this.state = {};
   }
@@ -37,11 +35,6 @@ class App extends Component {
       siteDescription: json.description,
       siteUrl: json.url
     });
-  }
-
-  async _initializeMediaModel() {
-    this.mediaModel = new Media();
-    let json = await this.mediaModel.fetch()
   }
 }
 

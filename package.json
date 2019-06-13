@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "start": "webpack-dev-server --mode development --hot",
-    "build": "webpack --mode development",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "deploy": "webpack && gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -32,9 +32,11 @@
     "babel-preset-stage-0": "^6.0.15",
     "css-loader": "^1.0.0",
     "file-loader": "^4.0.0",
+    "gh-pages": "^2.0.1",
+    "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.23.0",
     "webpack": "^4.19.1",
-    "webpack-cli": "^3.1.1",
+    "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.2.1"
   }
 }

@@ -3,6 +3,7 @@ import { hot } from "react-hot-loader";
 import SiteModel from "../models/site-model";
 import Header from "../header/header";
 import Footer from "../footer/footer";
+import Navigation from "../navigation/navigation";
 
 class App extends Component {
   constructor(props){
@@ -20,6 +21,7 @@ class App extends Component {
           title={this.state.siteTitle}
           description={this.state.siteDescription}
           url={this.state.siteUrl} />
+        <Navigation />
         <Footer 
           title={this.state.siteTitle} />
       </div>

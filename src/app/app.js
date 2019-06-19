@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { hot } from "react-hot-loader";
-import SiteModel from "../models/site-model";
+import ApiRequest, { URLS } from "../models/api_request";
 import Header from "../header/header";
 import Footer from "../footer/footer";
 import Navigation from "../navigation/navigation";
@@ -29,8 +29,8 @@ class App extends Component {
   }
 
   async _initializeModel() {
-    this.model = new SiteModel();
-    let json = await this.model.fetch()
+    this.model = new ApiRequest();
+    let json = await this.model.fetch(URLS.getSiteDetails())
     
     this.setState({
       siteTitle: json.name,

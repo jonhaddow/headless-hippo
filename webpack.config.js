@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
+	mode: 'production',
 	entry: ['./src/index.tsx'],
 	module: {
 		rules: [

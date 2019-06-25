@@ -15,7 +15,7 @@
   "scripts": {
     "build": "webpack",
     "deploy": "webpack && gh-pages -d dist",
-    "start": "webpack-dev-server --mode development --hot"
+    "start": "webpack-dev-server --mode development"
   },
   "devDependencies": {
     "@types/react": "^16.8.22",

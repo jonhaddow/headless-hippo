@@ -10,36 +10,40 @@ module.exports = {
 			{
 				test: /\.(t|j)sx?$/,
 				use: {
-					loader: 'ts-loader',
+					loader: 'ts-loader'
 				},
+				include: path.resolve(__dirname, './src')
 			},
 			{
 				test: /\.css$/,
 				use: ['style-loader', 'css-loader'],
+				include: path.resolve(__dirname, './src')
 			},
 			{
 				test: /\.(png|svg|jpg|gif)$/,
 				use: ['file-loader'],
+				include: path.resolve(__dirname, './src')
 			},
 		],
 	},
 	resolve: {
 		extensions: ['.tsx', '.ts', '.js', '.jsx'],
+		symlinks: false
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist/'),
-		filename: 'bundle.js',
+		filename: 'bundle.js'
 	},
 	devServer: {
 		contentBase: path.resolve(__dirname, 'dist/'),
 		port: 3000,
 		historyApiFallback: true,
+		hot: true
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: 'src/assets/index.html',
 		}),
-		new webpack.HotModuleReplacementPlugin(),
-	],
-	devtool: 'source-map',
+		new webpack.HotModuleReplacementPlugin()
+	]
 };

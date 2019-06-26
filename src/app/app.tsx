@@ -4,13 +4,19 @@ import Header from "../header/header";
 import Footer from "../footer/footer";
 import Navigation from "../navigation/navigation";
 
-class App extends React.Component<any, any> {
-  constructor(props : {}){
+interface AppState {
+  siteTitle: string,
+  siteDescription: string,
+  siteUrl: string
+}
+
+class App extends React.Component<{}, AppState> {
+  constructor(props: {}){
     super(props);
     
     this._initializeModel();
 
-    this.state = {};
+    this.state = {} as AppState;
   }
 
   render() {

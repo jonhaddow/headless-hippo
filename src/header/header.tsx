@@ -1,7 +1,13 @@
 import * as React from 'react';
 import './header.css';
 
-export default class Header extends React.Component<any, any> {
+interface HeaderProps {
+	url: string,
+	title: string,
+	description: string
+};
+
+export default class Header extends React.Component<HeaderProps, any> {
 	render() {
 		return (
 		<header className="page-header">

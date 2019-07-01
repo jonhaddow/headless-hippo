@@ -1,47 +1,52 @@
-import * as React from 'react';
-import * as ApiRequest from "../models/api_request";
-import Header from "../header/header";
-import Footer from "../footer/footer";
-import Navigation from "../navigation/navigation";
+import React, { Component } from 'react';
+import ApiRequest, { URLS } from '../models/api_request';
+import Header from '../header/header';
+import Footer from '../footer/footer';
+import Navigation from '../navigation/navigation';
 
-interface AppState {
-  siteTitle: string,
-  siteDescription: string,
-  siteUrl: string
+class AppState {
+	public siteTitle: string;
+
+	public siteDescription: string;
+
+	public siteUrl: string;
 }
 
-class App extends React.Component<{}, AppState> {
-  constructor(props: {}){
-    super(props);
-    
-    this._initializeModel();
+class App extends Component<{}, AppState> {
+	public constructor(props: {}) {
+		super(props);
 
-    this.state = {} as AppState;
-  }
+		this.initializeModel();
 
-  render() {
-    return(
-      <div className="main-container">
-        <Header
-          title={this.state.siteTitle}
-          description={this.state.siteDescription}
-          url={this.state.siteUrl} />
-        <Navigation />
-        <Footer 
-          title={this.state.siteTitle} />
-      </div>
-    );
-  }
+		this.state = new AppState();
+	}
 
-  async _initializeModel() {
-    const json = await ApiRequest.default.fetch(ApiRequest.URLS.getSiteDetails())
-    
-    this.setState({
-      siteTitle: json.name,
-      siteDescription: json.description,
-      siteUrl: json.url
-    });
-  }
+	private async initializeModel(): Promise<void> {
+		const json = await ApiRequest.fetch(URLS.getSiteDetails());
+
+		this.setState({
+			siteTitle: json.name,
+			siteDescription: json.description,
+			siteUrl: json.url
+		});
+	}
+
+	public render(): JSX.Element {
+		const { siteTitle, siteDescription, siteUrl } = this.state;
+		return (
+			<div className="main-container">
+				<Header
+					title={siteTitle}
+					description={siteDescription}
+					url={siteUrl}
+				/>
+				<Navigation />
+				<Footer
+					title={siteTitle}
+				/>
+			</div>
+		);
+	}
 }
 
 export default App;

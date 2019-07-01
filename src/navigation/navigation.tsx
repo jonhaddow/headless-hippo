@@ -7,8 +7,15 @@ import About from '../about/about';
 import Posts from '../posts/posts';
 import Recipes from '../recipes/recipes';
 
+class SingleRoute {
+	id: string;
+	url: string;
+	title: string;
+	component: any;
+}
+
 export default class Navigation extends React.Component<any, any> {
-	static getRoutes() {
+	static getRoutes() : Array<SingleRoute> {
 		return [{
 			id: 'home',
 			url: '/',
@@ -33,7 +40,7 @@ export default class Navigation extends React.Component<any, any> {
 	}
 
 	render() {
-		const routes = Navigation.getRoutes();
+		const routes = Navigation .getRoutes ( ); 
 
 		const navEls = routes.map(x => (
 			<li key={x.id}>

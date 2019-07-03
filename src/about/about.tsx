@@ -1,5 +1,5 @@
-import { Component } from 'react';
+import React from 'react';
 
-export default class About extends Component<{}, {}> {
-	public render(): string { return (''); }
+export default function(): JSX.Element {
+	return (<p>About</p>);
 }

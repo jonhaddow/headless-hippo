@@ -1,23 +1,23 @@
 export class URLS {
-	static baseUrl() : string{
+	public static baseUrl(): string{
 		return 'https://wastefreemama.com/wp-json';
 	}
 
-	static getSiteDetails() : string {
+	public static getSiteDetails(): string {
 		return URLS.baseUrl();
 	}
 
-	static getPosts() : string {
+	public 	static getPosts(): string {
 		return `${URLS.baseUrl()}/wp/v2/posts?context=embed&_embed`;
 	}
 
-	static getRecipes() : string {
+	public static getRecipes(): string {
 		return `${URLS.baseUrl()}/wp/v2/jh-recipes?context=embed&_embed`;
 	}
 }
 
 export default class ApiRequest {
-	static async fetch(url : string) : Promise<any> {
+	public static async fetch<T>(url: string): Promise<T> {
 		const response = await fetch(url);
 
 		if (!response.ok) {

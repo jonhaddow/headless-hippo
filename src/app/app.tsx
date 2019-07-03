@@ -4,12 +4,10 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import Navigation from '../navigation/navigation';
 
-class AppState {
-	public siteTitle: string;
-
-	public siteDescription: string;
-
-	public siteUrl: string;
+interface AppState {
+	name?: string;
+	description?: string;
+	url?: string;
 }
 
 class App extends Component<{}, AppState> {
@@ -18,31 +16,26 @@ class App extends Component<{}, AppState> {
 
 		this.initializeModel();
 
-		this.state = new AppState();
+		this.state = {};
 	}
 
 	private async initializeModel(): Promise<void> {
-		const json = await ApiRequest.fetch(URLS.getSiteDetails());
-
-		this.setState({
-			siteTitle: json.name,
-			siteDescription: json.description,
-			siteUrl: json.url
-		});
+		const json = await ApiRequest.fetch<AppState>(URLS.getSiteDetails());
+		this.setState(json);
 	}
 
 	public render(): JSX.Element {
-		const { siteTitle, siteDescription, siteUrl } = this.state;
+		const { name, description, url } = this.state;
 		return (
 			<div className="main-container">
 				<Header
-					title={siteTitle}
-					description={siteDescription}
-					url={siteUrl}
+					title={name}
+					description={description}
+					url={url}
 				/>
 				<Navigation />
 				<Footer
-					title={siteTitle}
+					title={name}
 				/>
 			</div>
 		);

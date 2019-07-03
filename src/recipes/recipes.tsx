@@ -1,45 +1,71 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import ApiRequest, { URLS } from '../models/api_request';
 
-export default class Recipes extends React.Component<any, any> {
-  constructor(props: any) {
-    super(props);
+interface Recipe {
+	id: number;
+	title: {
+		rendered: string;
+	};
+	_embedded: {
+		["wp:featuredmedia"]: {
+			alt_text: string;
+			media_details: {
+				sizes: {
+					medium: {
+						source_url: string;
+					};
+				};
+			};
+		}[];
+	};
+}
 
-    this.initializeModel();
+class RecipesState {
+	public recipes: Recipe[];
+}
 
-    this.state = {};
-  }
+export default class Recipes extends Component<{}, RecipesState> {
+	public constructor(props: {}) {
+		super(props);
 
-  async initializeModel() {
-    const response = await ApiRequest.fetch(URLS.getRecipes());
+		this.initializeModel();
 
-    this.setState({
-      posts: response,
-    });
-  }
+		this.state = new RecipesState();
+	}
 
-  render() {
-    const { posts } = this.state;
+	private async initializeModel(): Promise<void> {
+		const response = await ApiRequest.fetch<Recipe[]>(URLS.getRecipes())
 
-    if (!posts) {
-      return null;
-    }
+		this.setState({
+			recipes: response
+		});
+	}
 
-    const postEls = posts.map((x : any) => (
-      <li key={x.id}>
-        {/* eslint-disable-next-line no-underscore-dangle */}
-        <img src={x._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url} alt={x._embedded['wp:featuredmedia'][0].alt_text} />
-        <p>{x.title.rendered}</p>
-      </li>
-    ));
+	public render(): JSX.Element {
+		const { recipes } = this.state;
 
-    return (
-      <div className="posts">
-        <h1>Recipes</h1>
-        <ul>
-          {postEls}
-        </ul>
-      </div>
-    );
-  }
+		if (!recipes) {
+			return null;
+		}
+		
+		const recipeEls = recipes.map((recipe): JSX.Element => {
+			const innerEls: JSX.Element[] = [];
+
+			const image = recipe._embedded["wp:featuredmedia"][0];
+			if (image !== null) {
+				innerEls.push(<img key={`img-${recipe.id}`} src={image.media_details.sizes.medium.source_url} alt={image.alt_text} />);
+			}
+
+			innerEls.push(<p key={`title-${recipe.id}`}>{recipe.title.rendered}</p>);
+			
+			return (<li key={recipe.id}>{innerEls}</li>);
+		});
+
+		return(
+			<div className="recipes">
+				<h1>Recipes</h1>
+				<ul>{recipeEls}</ul>
+			</div>
+		);
+	}
 }

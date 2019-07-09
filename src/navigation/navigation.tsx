@@ -9,7 +9,7 @@ interface SingleRoute {
 	id: string;
 	url: string;
 	title: string;
-	component: any;
+	component: (() => JSX.Element)|typeof Component;
 }
 
 export default class Navigation extends Component<{}, {}> {

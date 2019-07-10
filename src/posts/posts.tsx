@@ -7,17 +7,30 @@ class PostsState {
 	public posts: PostModel[];
 }
 
-export default class Posts extends Component<{}, PostsState> {
-	public constructor(props: {}) {
+export enum PostType {
+	Recipe,
+	Blog
+}
+
+export default class Posts extends Component<{ postType: PostType }, PostsState> {
+	public constructor(props: { postType: PostType }) {
 		super(props);
 
-		this.initializeModel();
+		this.initializeModel(props.postType);
 
 		this.state = new PostsState();
 	}
 
-	private async initializeModel(): Promise<void> {
-		const response = await ApiRequest.fetch<PostModel[]>(URLS.getPosts())
+	private async initializeModel(postType: PostType): Promise<void> {
+
+		let url: string;
+		if (postType === PostType.Recipe) {
+			url = URLS.getRecipes();
+		} else {
+			url = URLS.getPosts();
+		}
+
+		const response = await ApiRequest.fetch<PostModel[]>(url)
 
 		this.setState({
 			posts: response
@@ -35,9 +48,12 @@ export default class Posts extends Component<{}, PostsState> {
 			return (<PostCard key={post.id} {...post} />);
 		});
 
+		const { postType } = this.props;
+		const title = postType == PostType.Blog ? 'Posts' : 'Recipes'
+
 		return (
 			<div className="posts">
-				<h1>Posts</h1>
+				<h1>{title}</h1>
 				<ul>{postEls}</ul>
 			</div>
 		);

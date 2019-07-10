@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom';
+import { RouteComponentProps, BrowserRouter, Route, Switch, NavLink } from 'react-router-dom';
 import Home from '../home/home';
 import About from '../about/about';
-import Posts from '../posts/posts';
-import Recipes from '../recipes/recipes';
+import Posts, { PostType } from '../posts/posts';
 
 interface SingleRoute {
 	id: string;
 	url: string;
 	title: string;
-	component: (() => JSX.Element)|typeof Component;
+	render: (routeProps: RouteComponentProps) => JSX.Element;
 }
 
 export default class Navigation extends Component<{}, {}> {
@@ -18,22 +17,36 @@ export default class Navigation extends Component<{}, {}> {
 			id: 'home',
 			url: '/',
 			title: 'Home',
-			component: Home,
+			render: (): JSX.Element => <Home />
 		}, {
 			id: 'about',
 			url: '/about',
 			title: 'About',
-			component: About,
+			render: (): JSX.Element => <About />
 		}, {
 			id: 'posts',
 			url: '/posts',
 			title: 'Posts',
-			component: Posts,
+			render: (routeProps: RouteComponentProps): JSX.Element => {
+				return (
+					<Posts 
+						{...routeProps}
+						postType={PostType.Blog}
+					/>
+				);
+			}
 		}, {
 			id: 'recipes',
 			url: '/recipes',
 			title: 'Recipes',
-			component: Recipes,
+			render: (routeProps: RouteComponentProps): JSX.Element => {
+				return (
+					<Posts 
+						{...routeProps}
+						postType={PostType.Recipe}
+					/>
+				);
+			}
 		}];
 	}
 
@@ -47,7 +60,12 @@ export default class Navigation extends Component<{}, {}> {
 		));
 
 		const navRoutes = routes.map((route): JSX.Element => (
-			<Route key={`${route.id}-route`} exact path={route.url} component={route.component} />
+			<Route 
+				key={`${route.id}-route`} 
+				exact
+				path={route.url} 
+				render={route.render}
+			/>
 		));
 
 		return (

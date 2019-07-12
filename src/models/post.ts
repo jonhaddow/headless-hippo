@@ -3,6 +3,7 @@ export default interface PostModel {
 	title: {
 		rendered: string;
 	};
+	slug: string;
 	_embedded: {
 		["wp:featuredmedia"]: {
 			alt_text: string;

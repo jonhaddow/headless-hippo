@@ -3,22 +3,28 @@ import ApiRequest, { URLS } from '../models/api_request';
 import PostModel from '../models/post';
 import PostCard from '../post_card/post_card';
 
-class PostsState {
-	public posts: PostModel[];
-}
-
 export enum PostType {
 	Recipe,
 	Blog
 }
 
-export default class Posts extends Component<{ postType: PostType }, PostsState> {
-	public constructor(props: { postType: PostType }) {
+interface PostsState {
+	posts: PostModel[];
+}
+
+interface PostsProps {
+	postType: PostType;
+}
+
+export default class Posts extends Component<PostsProps, PostsState> {
+	public constructor(props: PostsProps) {
 		super(props);
 
 		this.initializeModel(props.postType);
 
-		this.state = new PostsState();
+		this.state = {
+			posts: []
+		};
 	}
 
 	private async initializeModel(postType: PostType): Promise<void> {
@@ -45,7 +51,7 @@ export default class Posts extends Component<{ postType: PostType }, PostsState>
 		}
 
 		const postEls = posts.map((post): JSX.Element => {
-			return (<PostCard key={post.id} {...post} />);
+			return (<PostCard key={post.id} postModel={post} />);
 		});
 
 		const { postType } = this.props;

@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import Home from '../home/home';
 import About from '../about/about';
 import Posts, { PostType } from '../posts/posts';
-import Post from '../post/post';
+import Post, { PostParams } from '../post/post';
 
 interface NavLink {
 	title: string;
@@ -66,7 +66,7 @@ const Routes: Route[] = [{
 }, {
 	id: 'blog',
 	path: '/blog/:slug',
-	render: (routeProps: RouteComponentProps): JSX.Element => {
+	render: (routeProps: RouteComponentProps<PostParams>): JSX.Element => {
 		return (
 			<Post 
 				{...routeProps}

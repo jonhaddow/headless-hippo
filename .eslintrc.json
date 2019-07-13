@@ -29,7 +29,8 @@
         "react/jsx-indent": ["error", "tab"],
         "react/jsx-indent-props": ["error", "tab"],
         "comma-dangle": "off",
-        "react/jsx-filename-extension": ["error", { "extensions": [".tsx", ".jsx"] }]
+        "react/jsx-filename-extension": ["error", { "extensions": [".tsx", ".jsx"] }],
+        "react/no-danger": "off"
     },
     "settings": {
         "import/resolver": {

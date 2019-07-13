@@ -70,6 +70,19 @@ const Routes: Route[] = [{
 		return (
 			<Post 
 				{...routeProps}
+				postType={PostType.Blog}
+			/>
+		);
+	},
+	isExact: false
+}, {
+	id: 'recipe',
+	path: '/recipe/:slug',
+	render: (routeProps: RouteComponentProps<PostParams>): JSX.Element => {
+		return (
+			<Post 
+				{...routeProps}
+				postType={PostType.Recipe}
 			/>
 		);
 	},

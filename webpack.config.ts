@@ -32,7 +32,8 @@ const config: webpack.Configuration = {
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist/'),
-		filename: 'bundle.js'
+		filename: 'bundle.js',
+		publicPath: '/'
 	},
 	devServer: {
 		contentBase: path.resolve(__dirname, 'dist/'),

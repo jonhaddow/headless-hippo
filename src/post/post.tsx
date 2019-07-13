@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { match } from "react-router-dom";
 import PostModel from "../models/post";
 import ApiRequest, { URLS } from "../models/api_request";
+import { PostType } from "../posts/posts";
 
 export interface PostParams {
 	slug: string;
@@ -9,6 +10,7 @@ export interface PostParams {
 
 interface PostProps {
 	match: match<PostParams>;
+	postType: PostType;
 }
 
 interface PostState {
@@ -25,9 +27,11 @@ export default class Post extends Component<PostProps, PostState> {
 	}
 
 	private async initializeModel(): Promise<void> {
-		const { match: { params }} = this.props;
+		const { match: { params: { slug } }, postType} = this.props;
 
-		const postModel = await ApiRequest.fetch<PostModel[]>(URLS.getPost(params.slug));
+		const url = postType == PostType.Blog ? URLS.getBlog(slug) : URLS.getRecipe(slug);
+
+		const postModel = await ApiRequest.fetch<PostModel[]>(url);
 		this.setState({ postModel: postModel[0]});
 	}
 
@@ -45,7 +49,7 @@ export default class Post extends Component<PostProps, PostState> {
 		return (
 			<section>
 				{title}
-				
+
 				{/* I trust this html rendered by wordpress */}
 				<div dangerouslySetInnerHTML={{ __html: content }} />
 			</section>

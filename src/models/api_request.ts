@@ -7,16 +7,20 @@ export class URLS {
 		return URLS.baseUrl();
 	}
 
-	public 	static getPosts(): string {
+	public 	static getBlogs(): string {
 		return `${URLS.baseUrl()}/wp/v2/posts?context=embed&_embed`;
 	}
 
-	public static getPost(slug: string): string {
+	public static getBlog(slug: string): string {
 		return `${URLS.baseUrl()}/wp/v2/posts?slug=${slug}`;
 	}
 
 	public static getRecipes(): string {
 		return `${URLS.baseUrl()}/wp/v2/jh-recipes?context=embed&_embed`;
+	}
+
+	public static getRecipe(slug: string): string {
+		return `${URLS.baseUrl()}/wp/v2/jh-recipes?slug=${slug}`;
 	}
 }
 

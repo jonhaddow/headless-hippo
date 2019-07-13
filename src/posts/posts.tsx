@@ -33,7 +33,7 @@ export default class Posts extends Component<PostsProps, PostsState> {
 		if (postType === PostType.Recipe) {
 			url = URLS.getRecipes();
 		} else {
-			url = URLS.getPosts();
+			url = URLS.getBlogs();
 		}
 
 		const response = await ApiRequest.fetch<PostModel[]>(url)
@@ -50,11 +50,12 @@ export default class Posts extends Component<PostsProps, PostsState> {
 			return null;
 		}
 
+		const { postType } = this.props;
+
 		const postEls = posts.map((post): JSX.Element => {
-			return (<PostCard key={post.id} postModel={post} />);
+			return (<PostCard key={post.id} postModel={post} postType={postType} />);
 		});
 
-		const { postType } = this.props;
 		const title = postType == PostType.Blog ? 'Posts' : 'Recipes'
 
 		return (

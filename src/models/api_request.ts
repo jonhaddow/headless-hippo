@@ -7,24 +7,28 @@ export class URLS {
 		return `${URLS.baseUrl()}/wp/v2/pages?slug=about`;
 	}
 
-	public static getSiteDetails(): string {
-		return URLS.baseUrl();
+	public static getBlog(slug: string): string {
+		return `${URLS.baseUrl()}/wp/v2/posts?slug=${slug}`;
 	}
 
 	public 	static getBlogs(): string {
 		return `${URLS.baseUrl()}/wp/v2/posts?context=embed&_embed`;
 	}
 
-	public static getBlog(slug: string): string {
-		return `${URLS.baseUrl()}/wp/v2/posts?slug=${slug}`;
+	public static getSiteDetails(): string {
+		return URLS.baseUrl();
 	}
 
-	public static getRecipes(): string {
-		return `${URLS.baseUrl()}/wp/v2/jh-recipes?context=embed&_embed`;
+	public static getRecentPosts(): string {
+		return `${URLS.baseUrl()}/jh-custom/v1/posts/recent`;
 	}
 
 	public static getRecipe(slug: string): string {
 		return `${URLS.baseUrl()}/wp/v2/jh-recipes?slug=${slug}`;
+	}
+
+	public static getRecipes(): string {
+		return `${URLS.baseUrl()}/wp/v2/jh-recipes?context=embed&_embed`;
 	}
 }
 

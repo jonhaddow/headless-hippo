@@ -3,6 +3,10 @@ export class URLS {
 		return 'https://wastefreemama.com/wp-json';
 	}
 
+	public static getAboutPage(): string {
+		return `${URLS.baseUrl()}/wp/v2/pages?slug=about`;
+	}
+
 	public static getSiteDetails(): string {
 		return URLS.baseUrl();
 	}

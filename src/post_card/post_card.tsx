@@ -1,16 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PostModel from '../models/post';
-import { PostType } from '../posts/posts';
 
 interface PostCardProps {
 	postModel: PostModel;
-	postType: PostType;
+	linkUrl: (slug: string) => string;
 }
 
 export default function PostCard(props: PostCardProps): JSX.Element {
 	const innerEls: JSX.Element[] = [];
-	const { postModel: { id, _embedded, title, slug }, postType } = props;
+	const { postModel: { id, _embedded, title, slug }, linkUrl } = props;
 	const image = _embedded["wp:featuredmedia"][0];
 
 	if (image !== null) {
@@ -19,7 +18,7 @@ export default function PostCard(props: PostCardProps): JSX.Element {
 
 	innerEls.push(<p key={`post-title-${id}`}>{title.rendered}</p>);
 
-	const pathname = `/${postType == PostType.Blog ? 'blog' : 'recipe'}/${slug}`;
+	const pathname = linkUrl(slug);
 
 	return (
 		<li>

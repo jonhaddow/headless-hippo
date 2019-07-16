@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { match } from "react-router-dom";
 import PostModel from "../models/post";
-import ApiRequest, { URLS } from "../models/api_request";
-import { PostType } from "../posts/posts";
+import ApiRequest from "../models/api_request";
 
 export interface PostParams {
 	slug: string;
@@ -10,14 +9,14 @@ export interface PostParams {
 
 interface PostProps {
 	match: match<PostParams>;
-	postType: PostType;
 }
 
 interface PostState {
 	postModel?: PostModel;
 }
 
-export default class Post extends Component<PostProps, PostState> {
+export default abstract class Post extends Component<PostProps, PostState> {
+
 	public constructor(props: PostProps) {
 		super(props);
 
@@ -26,12 +25,10 @@ export default class Post extends Component<PostProps, PostState> {
 		this.initializeModel();
 	}
 
+	abstract getUrl(): string;
+
 	private async initializeModel(): Promise<void> {
-		const { match: { params: { slug } }, postType} = this.props;
-
-		const url = postType == PostType.Blog ? URLS.getBlog(slug) : URLS.getRecipe(slug);
-
-		const postModel = await ApiRequest.fetch<PostModel[]>(url);
+		const postModel = await ApiRequest.fetch<PostModel[]>(this.getUrl());
 		this.setState({ postModel: postModel[0]});
 	}
 
@@ -48,7 +45,7 @@ export default class Post extends Component<PostProps, PostState> {
 
 		return (
 			<section>
-				{title}
+				<h1>{title}</h1>
 
 				{/* I trust this html rendered by wordpress */}
 				<div dangerouslySetInnerHTML={{ __html: content }} />

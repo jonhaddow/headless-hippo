@@ -1,36 +1,15 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom';
-import Routes from './routes';
+import { NavLink } from 'react-router-dom';
 
 export default function Navigation(): JSX.Element {
-	const navEls = Routes.map((route): JSX.Element => {
-		if (route.navLink == null) return;
-		return (
-			<li key={route.id}>
-				<NavLink to={route.path}>{route.navLink.title}</NavLink>
-			</li>
-		);
-	});
-
-	const navRoutes = Routes.map((route): JSX.Element => (
-		<Route 
-			key={`${route.id}-route`} 
-			exact={route.isExact}
-			path={route.path} 
-			render={route.render}
-		/>
-	));
-
 	return (
-		<BrowserRouter>
-			<nav>
-				<ul>
-					{navEls}
-				</ul>
-			</nav>
-			<Switch>
-				{navRoutes}
-			</Switch>
-		</BrowserRouter>
+		<nav>
+			<ul>
+				<li><NavLink to='/'>Home</NavLink></li>
+				<li><NavLink to='/about'>About</NavLink></li>
+				<li><NavLink to='/blogs'>Blogs</NavLink></li>
+				<li><NavLink to='/recipes'>Recipes</NavLink></li>
+			</ul>
+		</nav>
 	);
 }

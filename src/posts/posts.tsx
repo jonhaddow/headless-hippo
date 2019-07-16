@@ -1,43 +1,31 @@
 import React, { Component } from 'react';
-import ApiRequest, { URLS } from '../models/api_request';
+import ApiRequest from '../models/api_request';
 import PostModel from '../models/post';
 import PostCard from '../post_card/post_card';
-
-export enum PostType {
-	Recipe,
-	Blog
-}
 
 interface PostsState {
 	posts: PostModel[];
 }
 
-interface PostsProps {
-	postType: PostType;
-}
-
-export default class Posts extends Component<PostsProps, PostsState> {
-	public constructor(props: PostsProps) {
+export default abstract class Posts extends Component<{}, PostsState> {
+	public constructor(props: {}) {
 		super(props);
 
-		this.initializeModel(props.postType);
+		this.initializeModel();
 
 		this.state = {
 			posts: []
 		};
 	}
 
-	private async initializeModel(postType: PostType): Promise<void> {
+	abstract getLinkUrl(slug: string): string;
 
-		let url: string;
-		if (postType === PostType.Recipe) {
-			url = URLS.getRecipes();
-		} else {
-			url = URLS.getBlogs();
-		}
+	abstract getTitle(): string;
 
-		const response = await ApiRequest.fetch<PostModel[]>(url)
+	abstract getUrl(): string;
 
+	private async initializeModel(): Promise<void> {
+		const response = await ApiRequest.fetch<PostModel[]>(this.getUrl())
 		this.setState({
 			posts: response
 		});
@@ -50,13 +38,11 @@ export default class Posts extends Component<PostsProps, PostsState> {
 			return null;
 		}
 
-		const { postType } = this.props;
-
 		const postEls = posts.map((post): JSX.Element => {
-			return (<PostCard key={post.id} postModel={post} postType={postType} />);
+			return (<PostCard key={post.id} postModel={post} linkUrl={this.getLinkUrl} />);
 		});
 
-		const title = postType == PostType.Blog ? 'Posts' : 'Recipes'
+		const title = this.getTitle();
 
 		return (
 			<div className="posts">

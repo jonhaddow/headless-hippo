@@ -1,18 +1,20 @@
 import React from 'react';
-import './header.css';
+import { Link } from 'react-router-dom';
+import styles from './header.css';
 
 interface HeaderProps {
-	url: string;
 	title: string;
 	description: string;
 }
 
-export default function(props: HeaderProps): JSX.Element {
-	const { url, title, description } = props;
+export default function Header(props: HeaderProps): JSX.Element {
+	const { title, description } = props;
 	return (
-		<header className="page-header">
-			<a href={url}><h1>{title}</h1></a>
-			<p>{description}</p>
+		<header className={styles.header}>
+			<h1>
+				<Link to='/' className={styles.title}>{title}</Link>
+			</h1>
+			<p className={styles.description}>{description}</p>
 		</header>
 	);
 }

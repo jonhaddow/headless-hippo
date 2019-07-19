@@ -1,0 +1,15 @@
+.main-nav {
+	display: flex;
+	flex-direction: row;
+}
+
+.nav-list-item {
+	list-style: none;
+	padding: 5px;
+}
+
+.nav-item {
+	text-decoration: none;
+	color: black;
+	text-transform: capitalize;	
+}

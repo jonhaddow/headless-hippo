@@ -5,11 +5,11 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import Navigation from '../navigation/navigation';
 import Content from '../content/content';
+import styles from './app.css';
 
 interface AppState {
 	name?: string;
 	description?: string;
-	url?: string;
 }
 
 class App extends Component<{}, AppState> {
@@ -27,20 +27,21 @@ class App extends Component<{}, AppState> {
 	}
 
 	public render(): JSX.Element {
-		const { name, description, url } = this.state;
+		const { name, description } = this.state;
 		return (
-			<BrowserRouter>
-				<Header
-					title={name}
-					description={description}
-					url={url}
-				/>
-				<Navigation />
-				<Content />
-				<Footer
-					title={name}
-				/>
-			</BrowserRouter>
+			<div className={styles.wrapper}>
+				<BrowserRouter>
+					<Header
+						title={name}
+						description={description}
+					/>
+					<Navigation />
+					<Content />
+					<Footer
+						title={name}
+					/>
+				</BrowserRouter>
+			</div>
 		);
 	}
 }

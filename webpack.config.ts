@@ -9,21 +9,23 @@ const config: webpack.Configuration = {
 		rules: [
 			{
 				test: /\.(t|j)sx?$/,
-				use: {
-					loader: 'ts-loader'
-				},
-				include: path.resolve(__dirname, './src')
+				use: ['ts-loader']
 			},
 			{
 				test: /\.css$/,
-				use: ['style-loader', 'css-loader'],
-				include: path.resolve(__dirname, './src')
+				use: ['style-loader', {
+					loader: 'typings-for-css-modules-loader',
+					options: {
+						modules: true,
+						namedExport: true,
+						camelCase: true
+					}
+				}]
 			},
 			{
 				test: /\.(png|svg|jpg|gif)$/,
-				use: ['file-loader'],
-				include: path.resolve(__dirname, './src')
-			},
+				use: ['file-loader']
+			}
 		],
 	},
 	resolve: {
@@ -45,7 +47,10 @@ const config: webpack.Configuration = {
 		new HtmlWebpackPlugin({
 			template: 'src/assets/index.html',
 		}),
-		new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.WatchIgnorePlugin([
+			/css\.d\.ts$/
+		])
 	]
 };
 

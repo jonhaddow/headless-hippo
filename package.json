@@ -13,29 +13,33 @@
   "license": "ISC",
   "author": "Jon Haddow",
   "scripts": {
-    "build": "webpack",
-    "deploy": "webpack && gh-pages -d dist",
-    "start": "webpack-dev-server --mode development"
+    "build": "webpack --config ./webpack/webpack.prod.ts",
+    "deploy": "webpack --config ./webpack/webpack.prod.ts && gh-pages -d dist",
+    "start": "webpack-dev-server --progress --config ./webpack/webpack.dev.ts"
   },
   "devDependencies": {
     "@types/node": "^12.6.8",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
     "@types/react-router-dom": "^4.3.4",
-    "@types/webpack": "^4.4.35",
+    "@types/webpack": "^4.32.0",
     "@types/webpack-dev-server": "^3.1.7",
+    "@types/webpack-merge": "^4.1.5",
     "@typescript-eslint/eslint-plugin": "^1.12.0",
     "@typescript-eslint/parser": "^1.12.0",
     "css-loader": "^1.0.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
-    "eslint-plugin-import": "^2.18.1",
+    "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.14.2",
     "file-loader": "^4.1.0",
     "gh-pages": "^2.0.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.7.0",
     "style-loader": "^0.23.1",
     "stylelint-config-standard": "^18.3.0",
     "ts-loader": "^6.0.4",
@@ -46,13 +50,20 @@
     "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
+    "@types/autoprefixer": "^9.5.0",
+    "@types/cssnano": "^4.0.0",
     "@types/html-webpack-plugin": "^3.2.1",
+    "@types/mini-css-extract-plugin": "^0.2.1",
+    "autoprefixer": "^9.6.1",
+    "cssnano": "^4.1.10",
     "history": "^4.9.0",
     "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
     "normalize.css": "^8.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "5.0.1",
-    "webpack": "^4.36.1"
+    "webpack": "^4.36.1",
+    "webpack-merge": "^4.2.1"
   }
 }

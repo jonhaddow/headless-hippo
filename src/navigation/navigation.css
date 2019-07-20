@@ -3,16 +3,26 @@
 	flex-direction: row;
 	justify-content: center;
 	padding: 0;
+	margin: 0;
 }
 
 .nav-list-item {
 	list-style: none;
-	padding: 0 5px 0 5px;
+	padding: 0 5px;
 }
 
 .nav-item {
 	text-decoration: none;
 	color: black;
-	text-transform: capitalize;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 15px;
+	padding: 0 16px;
 	line-height: 60px;
+	font-weight: 600;
+	font-family: "Open Sans", sans-serif;
+}
+
+.active {
+	color: #ca9b52;
 }

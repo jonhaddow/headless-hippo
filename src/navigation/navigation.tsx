@@ -5,6 +5,9 @@ import styles from './navigation.css';
 export default function Navigation(): JSX.Element {
 
 	const listItems = [{
+		name: 'Home',
+		link: '/'
+	}, {
 		name: 'About',
 		link: '/about'
 	}, {
@@ -16,7 +19,7 @@ export default function Navigation(): JSX.Element {
 	}].map((x): JSX.Element => {
 		return(
 			<li key={x.name} className={styles.navListItem}>
-				<NavLink to={x.link} className={styles.navItem}>
+				<NavLink exact activeClassName={styles.active} to={x.link} className={styles.navItem}>
 					{x.name}
 				</NavLink>
 			</li>

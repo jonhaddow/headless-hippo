@@ -1,16 +1,16 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import webpack from 'webpack';
+import webpack, { Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-export default {
-	entry: ['./src/index.tsx'],
+const config: Configuration = {
+	entry: [ './src/index.tsx' ],
 	module: {
 		rules: [
 			{
 				test: /\.(t|j)sx?$/,
-				use: ['ts-loader'],
-				exclude: /node_modules/
+				loader: 'ts-loader',
+				include: [ path.resolve(__dirname, 'src') ]
 			},
 			{
 				test: /\.css$/,
@@ -34,12 +34,16 @@ export default {
 					{
 						loader: 'postcss-loader'
 					}
+				],
+				include: [
+					path.resolve(__dirname, 'src'),
+					/node_modules\/normalize.css/
 				]
 			},
 			{
 				test: /\.(png|svg|jpg|gif)$/,
-				use: ['file-loader'],
-				exclude: /node_modules/
+				loader: 'file-loader',
+				include: [ path.resolve(__dirname, 'src/assets') ]
 			}
 		],
 	},
@@ -56,7 +60,8 @@ export default {
 		contentBase: path.resolve(__dirname, 'dist/'),
 		port: 3000,
 		historyApiFallback: true,
-		hot: true
+		hot: true,
+		stats: 'errors-warnings'
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
@@ -67,5 +72,8 @@ export default {
 			/css\.d\.ts$/
 		]),
 		new MiniCssExtractPlugin()
-	]
+	],
+	stats: 'errors-warnings'
 };
+
+export default config;

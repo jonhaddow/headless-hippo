@@ -13,9 +13,9 @@
   "license": "ISC",
   "author": "Jon Haddow",
   "scripts": {
-    "build": "webpack --config ./webpack/webpack.prod.ts",
-    "deploy": "webpack --config ./webpack/webpack.prod.ts && gh-pages -d dist",
-    "start": "webpack-dev-server --progress --config ./webpack/webpack.dev.ts"
+    "build": "webpack --mode production",
+    "deploy": "webpack --mode production && gh-pages -d dist",
+    "start": "webpack-dev-server --progress --mode development"
   },
   "devDependencies": {
     "@types/node": "^12.6.8",

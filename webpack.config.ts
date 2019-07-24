@@ -26,6 +26,7 @@ const config: Configuration = {
 						loader: 'typings-for-css-modules-loader',
 						options: {
 							modules: true,
+							localIdentName: (process.env.NODE_ENV === 'production') ? undefined : '[name]_[local]_[hash:base64:5]',
 							namedExport: true,
 							camelCase: true,
 							importLoaders: 1

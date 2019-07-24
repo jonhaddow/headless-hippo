@@ -8,9 +8,17 @@ export default function Home(): JSX.Element {
 		<section>
 			<Slider />
 			
-			<Link to='/blogs' className={styles.blogs}>Blogs</Link>
-			<Link to='/about' className={styles.about}>About</Link>
-			<Link to='/recipes' className={styles.recipes}>Recipes</Link>
+			<ul>
+				<li>
+					<Link to='/blogs' className={styles.blogs}>Blogs</Link>
+				</li>
+				<li>
+					<Link to='/about' className={styles.about}>About</Link>
+				</li>
+				<li>
+					<Link to='/recipes' className={styles.recipes}>Recipes</Link>
+				</li>
+			</ul>
 		</section>
 	);
 }

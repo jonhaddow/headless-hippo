@@ -1,4 +1,7 @@
 import React, { Component, CSSProperties } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from "react-router-dom";
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import ApiRequest, { URLS } from '../../models/api_request';
 import styles from './slider.css';
 
@@ -64,24 +67,33 @@ export default class Slider extends Component<{}, { recentPosts: RecentPost[] }>
 
 		const sliderItems = recentPosts.map((post): JSX.Element => {
 			const style: CSSProperties = {
-				backgroundImage: `url("${post.image}")`
+				backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("${post.image}")`
 			};
+			const link = `/blog/${post.slug}`;
 			return(
 				<li 
 					key={post.slug} 
 					style={style} 
 					className={`${styles.sliderListItem} ${post.active ? styles.activeSliderItem : '' }`}
 				>
-					<span className={styles.postTitle}>{post.title}</span>
+					<h2>
+						<Link to={link} className={styles.postTitleLink}>{post.title}</Link>
+					</h2>
+					<Link to={link} className={styles.postReadMoreLink}>Read More</Link>
+					<time className={styles.postDate}>1st April 2019</time>
 				</li>
 			)
 		});
 		
 		return(
 			<div className={styles.sliderWrapper}>
+				<button type='button' className={`${styles.navButton} ${styles.prevButton}`}><FontAwesomeIcon icon={faChevronLeft} size='3x' /></button>
+				
 				<ul className={styles.sliderList}>
 					{sliderItems}
 				</ul>
+				
+				<button type='button' className={`${styles.navButton} ${styles.nextButton}`}><FontAwesomeIcon icon={faChevronRight} size='3x' /></button>
 			</div>
 		);
 	}

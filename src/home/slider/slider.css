@@ -1,15 +1,18 @@
 .slider-wrapper {
 	overflow: hidden;
-	height: 400px;
-	width: 800px;
+	height: 540px;
+	width: 1080px;
 	border: 1px solid gray;
+	box-shadow: 0 0 2px gray;
+	margin: 10px 30px;
+	position: relative;
 }
 
 .slider-list {
 	padding: 0;
-	position: relative;
-	height: 400px;
-	width: 800px;
+	margin: 0;
+	height: 100%;
+	width: 100%;
 }
 
 .slider-list-item {
@@ -17,13 +20,66 @@
 	width: 100%;
 	height: 100%;
 	display: none;
+	z-index: -1;
 	list-style: none;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	font-family: "Roboto", sans-serif;
+	color: white;
 }
 
 .active-slider-item {
-	display: block;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
-.post-title {
-	font-weight: 600;
+.active-slider-item > h2 {
+	margin-bottom: 30px;
+}
+
+.post-title-link {
+	color: white;
+	text-decoration: none;
+	letter-spacing: 1px;
+	font-size: 1.5em;
+	margin-bottom: 10px;
+	line-height: 44px;
+	font-weight: 400;
+}
+
+.post-read-more-link {
+	color: white;
+	font-size: 0.8em;
+	font-weight: bold;
+	letter-spacing: 2px;
+	border: white 1px solid;
+	text-decoration: none;
+	line-height: 40px;
+	padding: 0 25px;
+	margin-bottom: 25px;
+	text-transform: uppercase;
+}
+
+.post-date {
+	font-size: 0.9em;
+}
+
+.navButton {
+	cursor: pointer;
+	border: none;
+	background: none;
+	position: absolute;
+	top: 45%;
+	color: white;
+}
+
+.prevButton {
+	left: 7px;
+}
+
+.nextButton {
+	right: 7px;
 }

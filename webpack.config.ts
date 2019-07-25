@@ -13,7 +13,7 @@ const config: Configuration = {
 				include: [ path.resolve(__dirname, 'src') ]
 			},
 			{
-				test: /\.css$/,
+				test: /\.s?css$/,
 				use: [
 					{
 						loader: MiniCssExtractPlugin.loader,
@@ -34,6 +34,9 @@ const config: Configuration = {
 					}, 
 					{
 						loader: 'postcss-loader'
+					},
+					{
+						loader: 'sass-loader'
 					}
 				],
 				include: [
@@ -70,7 +73,8 @@ const config: Configuration = {
 		}),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.WatchIgnorePlugin([
-			/css\.d\.ts$/
+			/css\.d\.ts$/,
+			/scss\.d\.ts$/
 		]),
 		new MiniCssExtractPlugin()
 	],

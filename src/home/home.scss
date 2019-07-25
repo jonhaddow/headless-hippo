@@ -1,0 +1,25 @@
+.home {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0 50px;
+
+	> ul {
+		display: flex;
+		width: 1080px;
+		margin: 0;
+		padding: 0;
+
+		> li {
+			flex-grow: 1;
+			list-style: none;
+			height: 200px;
+			background-size: cover;
+			background-repeat: no-repeat;
+
+			> a {
+				text-decoration: none;
+			}
+		}
+	}
+}

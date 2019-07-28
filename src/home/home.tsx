@@ -27,8 +27,13 @@ export default function Home(): JSX.Element {
 			backgroundImage: `url(${link.imageSrc})`
 		};
 		return (
-			<li style={style}>
-				<Link to={link.link}>{link.title}</Link>
+			<li
+				key={link.title}
+				style={style}
+			>
+				<Link to={link.link}>
+					<h3>{link.title}</h3>
+				</Link>
 			</li>
 		);
 	});

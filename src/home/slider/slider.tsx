@@ -5,6 +5,11 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import ApiRequest, { URLS } from '../../models/api_request';
 import styles from './slider.scss';
 
+interface SliderState {
+	recentPosts: RecentPost[];
+	sliderRunning: boolean;
+}
+
 interface RecentPost {
 	slug: string;
 	type: string;
@@ -13,13 +18,13 @@ interface RecentPost {
 	active: boolean;
 }
 
-export default class Slider extends Component<{}, { recentPosts: RecentPost[] }> {
+export default class Slider extends Component<{}, SliderState> {
 	private sliderTimer: NodeJS.Timer;
 
 	public constructor(props: {}) {
 		super(props);
 
-		this.state = { recentPosts: [] };
+		this.state = { recentPosts: [], sliderRunning: true };
 	}
 
 	public async componentDidMount(): Promise<void> {
@@ -30,23 +35,63 @@ export default class Slider extends Component<{}, { recentPosts: RecentPost[] }>
 	public componentWillUnmount(): void {
 		clearInterval(this.sliderTimer);
 	}
+
+	private onDotClick(index: number): void {
+		this.setState({ sliderRunning: false });
+		this.goTo(index);
+	}
 	
 	private setupSliderTimer(): void {
 		this.sliderTimer = setInterval((): void => {
-			const { recentPosts } = this.state;
-			const currentIndex = recentPosts.findIndex((post): boolean => post.active);
+			const { sliderRunning } = this.state;
 
-			let nextIndex = currentIndex + 1;
-			if (nextIndex == recentPosts.length) nextIndex = 0; 
-	
-			recentPosts.forEach((post, index): void => {
-				post.active = index === nextIndex;
-			});
-	
-			this.setState({
-				recentPosts: recentPosts
-			});
+			if (!sliderRunning) {
+				clearInterval(this.sliderTimer);
+				return;
+			}
+			
+			this.incrementSlider();
 		}, 4000);
+	}
+
+	private goBack = (): void => {
+		this.setState({ sliderRunning: false });
+		this.decrementSlider();
+	}
+
+	private goNext = (): void => {
+		this.setState({ sliderRunning: false });
+		this.incrementSlider();
+	}
+
+	private goTo(index: number): void {
+		this.setState((state): SliderState => {
+			state.recentPosts.forEach((post, i): void => {
+				post.active = i === index;
+			});
+
+			return state;
+		})
+	}
+
+	private decrementSlider(): void {
+		const { recentPosts } = this.state;
+
+		const currentIndex = recentPosts.findIndex((post): boolean => post.active);
+		let nextIndex = currentIndex - 1;
+		if (nextIndex < 0) nextIndex = recentPosts.length - 1;
+
+		this.goTo(nextIndex);
+	}
+
+	private incrementSlider(): void {
+		const { recentPosts } = this.state;
+
+		const currentIndex = recentPosts.findIndex((post): boolean => post.active);
+		let nextIndex = currentIndex + 1;
+		if (nextIndex == recentPosts.length) nextIndex = 0;
+
+		this.goTo(nextIndex);
 	}
 
 	private async initializeModel(): Promise<void> {
@@ -84,16 +129,34 @@ export default class Slider extends Component<{}, { recentPosts: RecentPost[] }>
 				</li>
 			)
 		});
+
+		const dots = recentPosts.map((post, index): JSX.Element => {
+			return (
+				<li
+					key={post.slug}
+				>
+					<button
+						type='button'
+						onClick={this.onDotClick.bind(this, index)}
+						className={post.active ? styles.active : ''}
+					/>
+				</li>
+			);
+		})
 		
 		return(
 			<div className={styles.slider}>
-				<button type='button'><FontAwesomeIcon icon={faChevronLeft} size='3x' /></button>
+				<button type='button' onClick={this.goBack}><FontAwesomeIcon icon={faChevronLeft} size='3x' /></button>
 				
-				<ul>
+				<ul className={styles.posts}>
 					{sliderItems}
 				</ul>
+
+				<ul className={styles.dots}>
+					{dots}
+				</ul>
 				
-				<button type='button'><FontAwesomeIcon icon={faChevronRight} size='3x' /></button>
+				<button type='button' onClick={this.goNext}><FontAwesomeIcon icon={faChevronRight} size='3x' /></button>
 			</div>
 		);
 	}

@@ -1,4 +1,5 @@
 import React from "react";
+import Styles from './footer.scss';
 
 interface FooterProps {
 	title: string;
@@ -11,7 +12,7 @@ export default function(props: FooterProps): JSX.Element{
 
 	const copyrightMsg = `Copyright © ${year} ${title}`;
 	return (
-		<footer>
+		<footer className={Styles.footer}>
 			<p>{copyrightMsg}</p>
 		</footer>
 	);

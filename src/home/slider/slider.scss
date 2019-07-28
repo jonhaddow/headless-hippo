@@ -4,10 +4,9 @@
 	width: 1080px;
 	border: 1px solid gray;
 	box-shadow: 0 0 2px gray;
-	margin: 10px 30px;
 	position: relative;
 
-	> ul {
+	> .posts {
 		padding: 0;
 		margin: 0;
 		height: 100%;
@@ -80,6 +79,36 @@
 
 		&:last-child {
 			right: 7px;
+		}
+	}
+
+	> .dots {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		bottom: 10px;
+		width: 100%;
+		list-style: none;
+		padding: 0;
+
+		> li {
+			margin-right: 11px;
+
+			> button {
+				width: 13px;
+				height: 13px;
+				border: 2px white solid;
+				border-radius: 50%;
+				background: none;
+				transition: background-color 0.5s;
+				cursor: pointer;
+				padding: 0;
+
+				&.active {
+					background-color: white;
+				}
+			}
 		}
 	}
 }

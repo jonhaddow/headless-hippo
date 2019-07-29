@@ -8,11 +8,11 @@ export default function Navigation(): JSX.Element {
 		name: 'Home',
 		link: '/'
 	}, {
-		name: 'About',
-		link: '/about'
-	}, {
 		name: 'Blogs',
 		link: '/blogs'
+	}, {
+		name: 'About',
+		link: '/about'
 	}, {
 		name: 'Recipes',
 		link: '/recipes'

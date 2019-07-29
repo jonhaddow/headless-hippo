@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ApiRequest from '../models/api_request';
 import PostModel from '../models/post';
 import PostCard from '../post_card/post_card';
+import Styles from './posts.scss';
 
 interface PostsState {
 	posts: PostModel[];
@@ -39,14 +40,17 @@ export default abstract class Posts extends Component<{}, PostsState> {
 		}
 
 		const postEls = posts.map((post): JSX.Element => {
-			return (<PostCard key={post.id} postModel={post} linkUrl={this.getLinkUrl} />);
+			return (
+				<PostCard 
+					key={post.id}
+					postModel={post}
+					linkUrl={this.getLinkUrl} 
+				/>
+			);
 		});
 
-		const title = this.getTitle();
-
 		return (
-			<div className="posts">
-				<h1>{title}</h1>
+			<div className={Styles.posts}>
 				<ul>{postEls}</ul>
 			</div>
 		);

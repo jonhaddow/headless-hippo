@@ -30,9 +30,11 @@ export default class About extends Component<{}, { model: Page }> {
 
 		return (
 			<section>
-				<h1>{title}</h1>
+				<article>
+					<h1>{title}</h1>
 
-				<div dangerouslySetInnerHTML={{ __html: content }} />
+					<div dangerouslySetInnerHTML={{ __html: content }} />
+				</article>
 			</section>
 		);
 	}

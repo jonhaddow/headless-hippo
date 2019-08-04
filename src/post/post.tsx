@@ -45,10 +45,12 @@ export default abstract class Post extends Component<PostProps, PostState> {
 
 		return (
 			<section>
-				<h1>{title}</h1>
+				<article>
+					<h1>{title}</h1>
 
-				{/* I trust this html rendered by wordpress */}
-				<div dangerouslySetInnerHTML={{ __html: content }} />
+					{/* I trust this html rendered by wordpress */}
+					<div dangerouslySetInnerHTML={{ __html: content }} />
+				</article>
 			</section>
 		);
 	}

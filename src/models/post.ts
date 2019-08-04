@@ -1,5 +1,6 @@
 export default interface PostModel {
 	id: number;
+	date: string;
 	title: {
 		rendered: string;
 	};

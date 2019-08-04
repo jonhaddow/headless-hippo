@@ -10,26 +10,28 @@ interface PostCardProps {
 
 export default function PostCard(props: PostCardProps): JSX.Element {
 	const innerEls: JSX.Element[] = [];
-	const { postModel: { id, _embedded, title, slug }, linkUrl } = props;
+	const { postModel, postModel: { id, _embedded, title, slug }, linkUrl } = props;
 	const image = _embedded["wp:featuredmedia"][0];
 
 	innerEls.push(<p key={`post-title-${id}`}>{title.rendered}</p>);
 
 	const pathname = linkUrl(slug);
 
-	const listItemStyle: React.CSSProperties = {
-		backgroundImage: `url("${(image !== null) ? image.media_details.sizes.medium.source_url : ''}"`
-	};
-
+	const date = new Date(postModel.date);
+	
 	return (
 		<li 
 			className={Styles.postCard}
-			style={listItemStyle}
 		>
 			<Link
 				to={pathname}
 			>
-				{innerEls}
+				<img src={image.media_details.sizes.medium.source_url} alt='' />
+				
+				<div className={Styles.details}>
+					<span className={Styles.title}>{title.rendered}</span>
+					<time className={Styles.date}>{date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric'})}</time>
+				</div>
 			</Link>
 		</li>
 	);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from './header.css';
+import styles from './header.scss';
 
 interface HeaderProps {
 	title: string;
@@ -12,9 +12,9 @@ export default function Header(props: HeaderProps): JSX.Element {
 	return (
 		<header className={styles.header}>
 			<h1>
-				<Link to='/' className={styles.title}>{title}</Link>
+				<Link to='/'>{title}</Link>
 			</h1>
-			<p className={styles.description}>{description}</p>
+			<p>{description}</p>
 		</header>
 	);
 }

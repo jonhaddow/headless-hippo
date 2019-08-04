@@ -1,11 +1,21 @@
 .posts {
-	border: red solid 1px;
-
 	ul {
-		display: flex;
-		flex-wrap: wrap;
+		width: 100%;
+		padding: 0;
+		display: inline-grid;
+		grid-template-columns: auto auto auto;
+		grid-row-gap: 30px;
+		grid-column-gap: 40px;
 		list-style-type: none;
-		justify-content: space-around;
-		align-content: stretch;
+		justify-content: center;
+
+		@media screen and (max-width: 1650px) {
+			grid-template-columns: auto auto;
+		}
+
+		@media screen and (max-width: 1050px) {
+			grid-template-columns: 100%;
+			grid-column-gap: 20px;
+		}
 	}
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './navigation.css';
+import styles from './navigation.scss';
 
 export default function Navigation(): JSX.Element {
 
@@ -18,8 +18,8 @@ export default function Navigation(): JSX.Element {
 		link: '/recipes'
 	}].map((x): JSX.Element => {
 		return(
-			<li key={x.name} className={styles.navListItem}>
-				<NavLink exact activeClassName={styles.active} to={x.link} className={styles.navItem}>
+			<li key={x.name}>
+				<NavLink exact activeClassName={styles.active} to={x.link}>
 					{x.name}
 				</NavLink>
 			</li>
@@ -27,8 +27,8 @@ export default function Navigation(): JSX.Element {
 	});
 
 	return (
-		<nav>
-			<ul className={styles.mainNav}>
+		<nav className={styles.mainNav}>
+			<ul>
 				{listItems}
 			</ul>
 		</nav>

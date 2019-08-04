@@ -18,20 +18,21 @@ export default function PostCard(props: PostCardProps): JSX.Element {
 	const pathname = linkUrl(slug);
 
 	const date = new Date(postModel.date);
+
+	const listItemStyling: React.CSSProperties = {
+		backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("${image.media_details.sizes.medium.source_url}")`
+	};
 	
 	return (
 		<li 
 			className={Styles.postCard}
+			style={listItemStyling}
 		>
 			<Link
 				to={pathname}
 			>
-				<img src={image.media_details.sizes.medium.source_url} alt='' />
-				
-				<div className={Styles.details}>
-					<span className={Styles.title}>{title.rendered}</span>
-					<time className={Styles.date}>{date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric'})}</time>
-				</div>
+				<span className={Styles.title}>{title.rendered}</span>
+				<time className={Styles.date}>{date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric'})}</time>
 			</Link>
 		</li>
 	);

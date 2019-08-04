@@ -8,12 +8,19 @@
 		grid-column-gap: 40px;
 		list-style-type: none;
 		justify-content: center;
+		justify-items: center;
 
 		@media screen and (max-width: 1650px) {
 			grid-template-columns: auto auto;
+			grid-column-gap: 60px;
 		}
 
-		@media screen and (max-width: 1050px) {
+		@media screen and (max-width: 1200px) {
+			grid-template-columns: auto auto;
+			grid-column-gap: 20px;
+		}
+
+		@media screen and (max-width: 1080px) {
 			grid-template-columns: 100%;
 			grid-column-gap: 20px;
 		}

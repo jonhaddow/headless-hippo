@@ -5,13 +5,37 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
-section {
-	text-align: center;
+:global {
+	section {
+		display: flex;
+		justify-content: center;
 
-	article {
-		width: 60%;
-		display: inline-block;
-		line-height: 30px;
-		color: #3a3a3a;
+		article {
+			width: 60%;
+			display: inline-block;
+			line-height: 1.7em;
+			color: #474747;
+			margin-top: 20px;
+
+			@media screen and (max-width: 1050px) {
+				width: 80%;
+			}
+
+			@media screen and (max-width: 500px) {
+				width: 90%;
+			}
+
+			h1 {
+				text-align: center;
+			}
+
+			img {
+				text-align: center;
+			}
+
+			.aligncenter {
+				text-align: center;
+			}
+		}
 	}
 }

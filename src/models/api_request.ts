@@ -15,6 +15,10 @@ export class URLS {
 		return `${URLS.baseUrl()}/wp/v2/posts?context=embed&_embed`;
 	}
 
+	public static getMediaItem(id: number): string {
+		return `${URLS.baseUrl()}/wp/v2/media/${id}`;
+	}
+
 	public static getSiteDetails(): string {
 		return URLS.baseUrl();
 	}

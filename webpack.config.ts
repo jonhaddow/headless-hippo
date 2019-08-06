@@ -2,6 +2,7 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack, { Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CopyWebpackPlugin from "copy-webpack-plugin";
 
 const config: Configuration = {
 	entry: [ './src/index.tsx' ],
@@ -68,6 +69,9 @@ const config: Configuration = {
 		stats: 'errors-warnings'
 	},
 	plugins: [
+		new CopyWebpackPlugin([{
+			from: 'src/assets/static'
+		}]),
 		new HtmlWebpackPlugin({
 			template: 'src/assets/index.html',
 		}),

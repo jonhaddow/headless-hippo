@@ -41,6 +41,26 @@ body {
 					height: auto;
 				}
 			}
+
+			hr {
+				text-align: center;
+				background: none;
+				border: none;
+				margin: 30px 0;
+				line-height: 1;
+				height: auto;
+
+				&::after {
+					content: '\00b7 \00b7 \00b7';
+					letter-spacing: 2em;
+					font-size: 25px;
+					color: #191e23;
+
+					@media screen and (max-width: 700px) {
+						letter-spacing: 1em;
+					}
+				}
+			}
 		}
 	}
 }
